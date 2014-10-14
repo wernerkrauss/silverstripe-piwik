@@ -18,7 +18,7 @@
 	"require": {
 		"silverstripe/framework": "3.*",
 		"silverstripe/cms": "3.*",
-		"composer/installers": "*",
+		"composer/installers": "*"
 	},
 	"extra": {
 		"installer-name": "piwik"
