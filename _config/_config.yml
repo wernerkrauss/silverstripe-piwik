@@ -1,0 +1,10 @@
+---
+Name: piwikconfig
+After:
+  - 'framework/*'
+  - 'cms/*'
+---
+
+Controller:
+  extensions:
+    - 'PiwikExtension'
