@@ -1,0 +1,4 @@
+en:
+  PiwikSiteConfigExtension:
+    db_PiwikSiteID: 'PIWIK Site ID'
+    SiteIDDescription: 'The ID of this site, can be found in the generated PIWIK tracking code'

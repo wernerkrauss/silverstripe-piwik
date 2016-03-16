@@ -65,10 +65,17 @@ class PiwikExtension extends Extension
             return false;
         }
 
+        //used for overwriting defaults in SiteConfig, e.g. for different SiteIDs in a Subsite installation
+        $currentSiteConfig = Controller::curr()->hasMethod('getSiteConfig')
+            ? Controller::curr()->getSiteConfig()
+            : SiteConfig::current_site_config();
+
+
         $data = array(
             'WrapInJsTags' => $wrap,
             'URL' => Config::inst()->get('PiwikExtension', 'piwik_server'),
-            'SiteID' => Config::inst()->get('PiwikExtension', 'piwik_site_id')
+            'SiteID' => Config::inst()->get('PiwikExtension', 'piwik_site_id'),
+            'SiteConfig' => $currentSiteConfig
         );
 
         return ArrayData::create($data)->renderWith(array('Piwik'));
