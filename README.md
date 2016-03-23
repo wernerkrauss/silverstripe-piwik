@@ -1,5 +1,7 @@
 # Silverstripe Piwik Analytics Module
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wernerkrauss/silverstripe-piwik/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wernerkrauss/silverstripe-piwik/?branch=master)
+
 This module includes a piwik analytics javascript at the bottom of your page.
 
 It's configurable via config API, you can change the included Javascript by overwriting the Piwik.ss template.
