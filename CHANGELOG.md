@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Changed
  - Disable module on cli and dev/build, fixes #4
+ - Disable module on some controllers, use `PiwikExtension.excluded_controllers` config var
 
 ## [0.2.0] - 2016-03-16
 ### Changed

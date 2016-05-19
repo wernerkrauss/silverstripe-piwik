@@ -38,6 +38,12 @@ class PiwikExtension extends Extension
      */
     private static $include_in_backend = false;
 
+    private static $excluded_controllers = array(
+        'DevelopmentAdmin',
+        'DevBuildController',
+        'DatabaseAdmin'
+    );
+
     /**
      * includes the piwik tracking code when ContentController initializes...
      * @todo: get it working ;)
@@ -55,13 +61,6 @@ class PiwikExtension extends Extension
      */
     public function getPiwik($wrap = true)
     {
-        if (Director::is_cli()) {
-            return false;
-        }
-        //don't include on dev/build etc...
-        if (Controller::curr() instanceof DevelopmentAdmin) {
-            return false;
-        }
         if (Director::isDev() && !Config::inst()->get('PiwikExtension', 'show_on_dev')) {
             return false;
         }
@@ -98,6 +97,15 @@ class PiwikExtension extends Extension
             return false;
         }
 
+        if (Director::is_cli()) {
+            return false;
+        }
+
+        //don't include on dev/build etc...
+        if ($this->isBlockedController()) {
+            return false;
+        }
+
         if ($this->isBackend() && !Config::inst()->get('PiwikExtension', 'include_in_backend')) {
             return false;
         }
@@ -112,5 +120,20 @@ class PiwikExtension extends Extension
     public function isBackend()
     {
         return Controller::curr() instanceof LeftAndMain;
+    }
+
+    /**
+     * Checks if the current controller is in a list of blocked controllers (e.g. dev/build)
+     *
+     * @return mixed
+     */
+    public function isBlockedController()
+    {
+        return max(array_map(
+            function($name) {
+                return Controller::curr() instanceof $name;
+            },
+            Config::inst()->get('PiwikExtension', 'excluded_controllers')
+        ));
     }
 }

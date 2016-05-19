@@ -53,6 +53,10 @@ or to _/mysite/templates/_ and adjust the setting like
 ```
 _paq.push(["setSiteId", "$SiteConfig.PiwikSiteID"]);
 ```
+###Exclude on some controllers
+You can finetune the controllers Piwik should NOT be included using the `PiwikExtension.excluded_controllers` config var.
+By default the module is disabled on dev/build.
+
 
 ###Usage with Subsites and Translatable
 When you're useing Subsites with translatable you have to be sure to add it to the SiteConfig for every translation.
