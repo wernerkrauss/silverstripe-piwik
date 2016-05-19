@@ -55,6 +55,13 @@ class PiwikExtension extends Extension
      */
     public function getPiwik($wrap = true)
     {
+        if (Director::is_cli()) {
+            return false;
+        }
+        //don't include on dev/build etc...
+        if (Controller::curr() instanceof DevelopmentAdmin) {
+            return false;
+        }
         if (Director::isDev() && !Config::inst()->get('PiwikExtension', 'show_on_dev')) {
             return false;
         }

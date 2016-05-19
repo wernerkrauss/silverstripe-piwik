@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
+ - Disable module on cli and dev/build, fixes #4
+ 
 ## [0.1.1] - 2016-03-16
 ### Changed
  - Passing current $SiteConfig to the tracking code template to enable optional settings
