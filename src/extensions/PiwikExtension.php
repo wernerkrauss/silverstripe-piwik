@@ -1,5 +1,21 @@
 <?php
 
+namespace Netwerkstatt\Piwik\Extensions;
+
+
+use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\Control\Controller;
+use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Extension;
+use SilverStripe\Dev\DevBuildController;
+use SilverStripe\Dev\DevelopmentAdmin;
+use SilverStripe\ORM\DatabaseAdmin;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\View\ArrayData;
+use SilverStripe\View\Requirements;
+
+
 class PiwikExtension extends Extension
 {
 
@@ -38,11 +54,11 @@ class PiwikExtension extends Extension
      */
     private static $include_in_backend = false;
 
-    private static $excluded_controllers = array(
-        'DevelopmentAdmin',
-        'DevBuildController',
-        'DatabaseAdmin'
-    );
+    private static $excluded_controllers = [
+        DevelopmentAdmin::class,
+        DevBuildController::class,
+        DatabaseAdmin::class
+    ];
 
     /**
      * includes the piwik tracking code when ContentController initializes...
@@ -61,13 +77,13 @@ class PiwikExtension extends Extension
      */
     public function getPiwik($wrap = true)
     {
-        if (Director::isDev() && !Config::inst()->get('PiwikExtension', 'show_on_dev')) {
+        if (Director::isDev() && !Config::inst()->get(PiwikExtension::class, 'show_on_dev')) {
             return false;
         }
-        if (Director::isTest() && !Config::inst()->get('PiwikExtension', 'show_on_test')) {
+        if (Director::isTest() && !Config::inst()->get(PiwikExtension::class, 'show_on_test')) {
             return false;
         }
-        if (Director::isLive() && !Config::inst()->get('PiwikExtension', 'show_on_live')) {
+        if (Director::isLive() && !Config::inst()->get(PiwikExtension::class, 'show_on_live')) {
             return false;
         }
 
@@ -77,14 +93,14 @@ class PiwikExtension extends Extension
             : SiteConfig::current_site_config();
 
 
-        $data = array(
+        $data = [
             'WrapInJsTags' => $wrap,
-            'URL' => Config::inst()->get('PiwikExtension', 'piwik_server'),
-            'SiteID' => Config::inst()->get('PiwikExtension', 'piwik_site_id'),
+            'URL' => Config::inst()->get(PiwikExtension::class, 'piwik_server'),
+            'SiteID' => Config::inst()->get(PiwikExtension::class, 'piwik_site_id'),
             'SiteConfig' => $currentSiteConfig
-        );
+        ];
 
-        return ArrayData::create($data)->renderWith(array('Piwik'));
+        return ArrayData::create($data)->renderWith(['Netwerkstatt\\Piwik\\Piwik']);
     }
 
     /**
@@ -93,7 +109,7 @@ class PiwikExtension extends Extension
      */
     public function autoInclude()
     {
-        if (! Config::inst()->get('PiwikExtension', 'auto_include')) {
+        if (!Config::inst()->get(PiwikExtension::class, 'auto_include')) {
             return false;
         }
 
@@ -106,7 +122,7 @@ class PiwikExtension extends Extension
             return false;
         }
 
-        if ($this->isBackend() && !Config::inst()->get('PiwikExtension', 'include_in_backend')) {
+        if ($this->isBackend() && !Config::inst()->get(PiwikExtension::class, 'include_in_backend')) {
             return false;
         }
 
@@ -130,10 +146,10 @@ class PiwikExtension extends Extension
     public function isBlockedController()
     {
         return max(array_map(
-            function($name) {
+            function ($name) {
                 return Controller::curr() instanceof $name;
             },
-            Config::inst()->get('PiwikExtension', 'excluded_controllers')
+            Config::inst()->get(PiwikExtension::class, 'excluded_controllers')
         ));
     }
 }

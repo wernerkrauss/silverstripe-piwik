@@ -8,7 +8,9 @@ It's configurable via config API, you can change the included Javascript by over
 
 
 ##Requirements
-  * Silverstripe > 3.1
+  * Silverstripe > 4.0
+  
+For a SS3 compatible version use version 0.2.
 
 ##Installation
 Best installed via composer. You may clone the repo or download the zip, however you should find a directory called "piwik"
@@ -16,7 +18,7 @@ with all files in your silverstripe root folder.
 
 ###using Composer
 ```
-composer require wernerkrauss/silverstripe-piwik ^0.1.0
+composer require wernerkrauss/silverstripe-piwik ^0.3.0
 ```
 
 ##Features
@@ -27,7 +29,7 @@ composer require wernerkrauss/silverstripe-piwik ^0.1.0
 
 ##Configuration
 ```yml
-PiwikExtension:
+Netwerkstatt\Piwik\Extensions\PiwikExtension:
   piwik_server: '//logs.example.com/' #domain without protocol an trailing slash
   piwik_site_id: 123 #the id defined by your piwik install
   show_on_dev: false #default: don't show in dev mode
@@ -42,9 +44,9 @@ When you're using subsites you can add the PIWIK Site ID for each subsite / doma
 To do this you have to add an extension:
 
 ```yml
-SiteConfig:
+SilverStripe\SiteConfig\SiteConfig:
   extensions:
-    - PiwikSiteConfigExtension
+    - Netwerkstatt\Piwik\Extensions\PiwikSiteConfigExtension
 ```
 
 You'll also have to tweak the used template for the tracking code. Copy the default `Piwik.ss` file to your theme's _/templates/_ folder
@@ -65,9 +67,9 @@ One workaround might be if don't put the value fot the Piwik SiteID to SiteConfi
 Then don't extend SiteConfig but Subsite:
 
 ```yml
-Subsite:
+Silverstripe\Subsites\Model\Subsite:
   extensions:
-    - PiwikSiteConfigExtension
+    - Netwerkstatt\Piwik\Extensions\PiwikSiteConfigExtension
 ```
 
 and change your template to reflect the changes:

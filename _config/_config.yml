@@ -2,9 +2,7 @@
 Name: piwikconfig
 After:
   - 'framework/*'
-  - 'cms/*'
 ---
-
-Controller:
+SilverStripe\Control\Controller:
   extensions:
-    - 'PiwikExtension'
+    - Netwerkstatt\Piwik\Extensions\PiwikExtension

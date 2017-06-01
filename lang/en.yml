@@ -1,4 +1,4 @@
 en:
-  PiwikSiteConfigExtension:
-    db_PiwikSiteID: 'PIWIK Site ID'
+  Netwerkstatt\Piwik\Extensions\PiwikSiteConfigExtension:
     SiteIDDescription: 'The ID of this site, can be found in the generated PIWIK tracking code'
+    db_PiwikSiteID: 'PIWIK Site ID'
