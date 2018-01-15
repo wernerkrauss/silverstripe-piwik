@@ -13,12 +13,12 @@ It's configurable via config API, you can change the included Javascript by over
 For a SS3 compatible version use version 0.2.
 
 ## Installation
-Best installed via composer. You may clone the repo or download the zip, however you should find a directory called "piwik"
-with all files in your silverstripe root folder.
+Best installed via composer. You may clone the repo or download the zip, however you should find a directory called "silverstripe-piwik"
+with all files in `vendor/wernerkrauss/`
 
 ### using Composer
 ```
-composer require wernerkrauss/silverstripe-piwik ^0.3.0
+composer require wernerkrauss/silverstripe-piwik ^0.4.0
 ```
 
 ## Features

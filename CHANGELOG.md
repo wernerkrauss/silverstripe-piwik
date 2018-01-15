@@ -2,10 +2,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.4.0] - 2018-01-15
+### Changed
+ - Changed to silverstripe-vendormodule
+
+## [0.3.0] - 2017-06-01
 ### Changed
  - Disable module on cli and dev/build, fixes #4
  - Disable module on some controllers, use `PiwikExtension.excluded_controllers` config var
+ - Upgrade to SilverStripe 4
 
 ## [0.2.0] - 2016-03-16
 ### Changed
